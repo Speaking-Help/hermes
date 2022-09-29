@@ -1,26 +1,38 @@
-from ast import main
 import speech_recognition as sr
 
-r = sr.Recognizer()
+class Listener:
+  __r = sr.Recognizer()
 
-def recognize_from_mic():
-  with sr.Microphone() as source:
-      print("Say Something")
-      audio = r.listen(source)
-  try:
-      recd = r.recognize_sphinx(audio, language="en-US")
-      print("Did you say: "+ recd)
-  except:
-      print("Could not recognize")
+  @staticmethod
+  def recognize_from_mic(self):
+    """
+    Recognizes audio coming in from the devices microphone.
 
-def recognize_from_audio(input_audio):
-  with sr.AudioFile(input_audio) as source:
-      audio = r.record(source)
-  try:
-      recd = r.recognize_sphinx(audio, language="en-US")
-      print("Did you say: "+ recd)
-  except:
-      print("Could not recognize")
+    Ideally, this method should only be used for local debugging.
 
-recognize_from_mic();
-  
+    Returns the transcribed audio as a string.
+    """
+    with sr.Microphone() as source:
+        print("Say Something")
+        audio = self.__r.listen(source, phrase_time_limit=5)
+    try:
+        transcribed = self.__r.recognize_google(audio, language="en-US")
+        return transcribed
+    except:
+        print("Could not recognize")
+
+  @staticmethod
+  def recognize_from_audio(self, input_audio):
+    """
+    Recognizes audio given a WAV/AIFF/FLAC audio file path ``input_audio``. 
+
+    Returns the transcribed audio as a string.
+    """
+    with sr.AudioFile(input_audio) as source:
+        audio = self.__r.record(source)
+    try:
+        recorded = self.__r.recognize_google(audio, language="en-US")
+        print("Did you say: "+ recorded)
+    except:
+        print("Could not recognize")
+    
