@@ -21,7 +21,6 @@ class Listener:
     except:
         print("Could not recognize")
 
-  @staticmethod
   def recognize_from_audio(self, input_audio):
     """
     Recognizes audio given a WAV/AIFF/FLAC audio file path ``input_audio``. 
