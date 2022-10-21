@@ -46,3 +46,13 @@ class Transcriber:
     """
     result = self._model.transcribe(input_audio, language='english')
     return result["text"]
+
+
+# Hello. Yesterday, I go to store. Today I go shop.
+t = Transcriber()
+print("indian: ", t.transcribe_from_audio_whisper("indian.m4a"))
+print("italian: ", t.transcribe_from_audio_whisper("italian.m4a"))
+print("persian: ", t.transcribe_from_audio_whisper("persian.m4a"))
+print("spanish: ", t.transcribe_from_audio_whisper("spanish.m4a"))
+print("arab: ", t.transcribe_from_audio_whisper("arab.m4a"))
+print("japarean: ", t.transcribe_from_audio_whisper("japarean.m4a"))
