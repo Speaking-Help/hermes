@@ -18,4 +18,4 @@
 encoder/saved_models/*
 synthesizer/saved_models/*
 vocoder/saved_models/*
-saved/models
+saved_models
