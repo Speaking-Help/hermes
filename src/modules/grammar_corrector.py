@@ -5,7 +5,6 @@ import spacy
 def set_seed(seed):
     """
     Sets the seed for PyTorch's RNG
-
     """
     torch.manual_seed(seed)
     if torch.cuda.is_available():

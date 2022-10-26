@@ -3,9 +3,11 @@ import whisper
 
 class Transcriber:
 
+  # Create the recognizers
   _r = sr.Recognizer()
   _model = whisper.load_model("base.en")
 
+  # Transcribes using 
   def transcribe_from_mic(self):
     """
     Transcribes audio coming in from the devices microphone.
@@ -18,8 +20,7 @@ class Transcriber:
         print("Say Something")
         audio = self._r.listen(source)
     try:
-        transcribed = self._r.recognize_wit(audio, key="GW7E7PQ6QDFB66I4E34BG5XLXRM66PGC")
-        return transcribed
+        return transcribe_from_audio(audio)
     except:
         print("Could not recognize")
 
@@ -32,8 +33,8 @@ class Transcriber:
     with sr.AudioFile(input_audio) as source:
         audio = self._r.record(source)
     try:
-        recorded = self._r.recognize_google(audio, language="en-US")
-        print("Did you say: "+ recorded)
+        transcribed = self._r.recognize_google(audio, language="en-US")
+        return transcribed
     except:
         print("Could not recognize")
 
