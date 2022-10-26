@@ -16,7 +16,7 @@ class Grammar_Corrector:
         """
         Loads the Gramformer model
         """
-        self.gf = Gramformer(models=1, use_gpu=False)
+        self._gf = Gramformer(models=1, use_gpu=False)
 
     def correct_sentence(self, sentence):
         """
@@ -24,7 +24,7 @@ class Grammar_Corrector:
 
         Returns the corrected sentence
         """
-        corrected_sentences = self.gf.correct(sentence, max_candidates=1)
+        corrected_sentences = self._gf.correct(sentence, max_candidates=1)
         return corrected_sentences.pop()    #only one value is present, pop it from set
 
 
