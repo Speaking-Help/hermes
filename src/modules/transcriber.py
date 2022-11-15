@@ -1,6 +1,10 @@
 import speech_recognition as sr
 import whisper
 
+from scipy.io import wavfile
+import os
+import noisereduce as nr
+
 class Transcriber:
 
   # Create the recognizers
@@ -45,5 +49,10 @@ class Transcriber:
 
     Returns the transcribed audio as a string.
     """
-    result = self._model.transcribe(input_audio, language='english')
+
+    rate, data = wavfile.read(input_audio)
+    reduced_noise = nr.reduce_noise(y=data, sr=rate)
+    wavfile.write("denoised.wav", rate, reduced_noise)
+    result = self._model.transcribe("denoised.wav", language='english')
+    os.remove("denoised.wav")
     return result["text"]
