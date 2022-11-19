@@ -74,7 +74,6 @@ def create_app(test_config=None):
 
     @application.post('/grammarlyify')
     def grammarlyify():
-        #text = ???
 
         data = request.get_json()
 
@@ -91,10 +90,7 @@ def create_app(test_config=None):
     @application.post('/upload')
     def login_post():
             
-        print("JO")
         
-        #print(request.files['file'])
-        #print(exists(request.data))
         print(request.files['file'])
 
         print(exists(request.files['file'].filename))
@@ -113,11 +109,6 @@ def create_app(test_config=None):
 
         print("Audio recorded...")
 
-        #---OPTIONAL- play the iput file
-        #wave_obj = sa.WaveObject.from_wave_file(filename)
-        #play_obj = wave_obj.play()
-        #play_obj.wait_done()  # Wait until sound has finished playing
-
 
         text = "Default"
         filename = 'newFILE.wav'
@@ -130,38 +121,7 @@ def create_app(test_config=None):
             text = r.recognize_google(audio_data)
             print("You said: \"" + text + "\"")
 
-        
-        #wav_audio = AudioSegment.from_file(request.data[7:], format="caf")
-        #wav_audio.export("audio.mp3", format="mp3")
-
         return text
-   
-   
-    # @app.route('/login', methods=['GET', 'POST'])
-    # def login():
-    #     if flask.request.method == 'GET':
-    #         return '''
-    #             <form action='login' method='POST'>
-    #                 <input type='text' name='email' id='email' placeholder='email'/>
-    #                 <input type='password' name='password' id='password' placeholder='password'/>
-    #                 <input type='submit' name='submit'/>
-    #             </form>
-    #             '''
-
-    #     email = flask.request.form['email']
-    #     if email in users and flask.request.form['password'] == users[email]['password']:
-    #         user = User()
-    #         user.id = email
-    #         flask_login.login_user(user)
-    #         return flask.redirect(flask.url_for('protected'))
-
-    #     return 'Bad login'
-
-
-    # @app.route('/protected')
-    # @flask_login.login_required
-    # def protected():
-    #     return 'Logged in as: ' + flask_login.current_user.id
 
     @application.post('/toAudio')
     def TTS():
@@ -236,65 +196,8 @@ def create_app(test_config=None):
 
 
 
-#         print("JO")
-        
-#         #print(request.files['file'])
-#         #print(exists(request.data))
-        
-#         print(request.files['file'])
-
-#         print(exists(request.files['file'].filename))
-#         uploaded_file = request.files['file']
-#         if uploaded_file.filename != '':
-#             uploaded_file.save(uploaded_file.filename)
-        
-#         print(exists(request.files['file'].filename))
 
 
-#         filename = uploaded_file.filename
-
-#         track = AudioSegment.from_file(filename,  format= 'm4a')
-#         file_handle = track.export('newFILE.wav', format='wav')
-
-
-#         print("Audio recorded...")
-
-#         #---OPTIONAL- play the iput file
-#         #wave_obj = sa.WaveObject.from_wave_file(filename)
-#         #play_obj = wave_obj.play()
-#         #play_obj.wait_done()  # Wait until sound has finished playing
-
-
-#         text = "Default"
-#         filename = 'newFILE.wav'
-# ############################################
-
-
-
-
-
-
-#         print("HERE")
-#         import argparse
-#         if torch.cuda.is_available():
-#             device_id = torch.cuda.current_device()
-#             gpu_properties = torch.cuda.get_device_properties(device_id)
-#             ## Print some environment information (for debugging purposes)
-#             print("Found %d GPUs available. Using GPU %d (%s) of compute capability %d.%d with "
-#                 "%.1fGb total memory.\n" %
-#                 (torch.cuda.device_count(),
-#                 device_id,
-#                 gpu_properties.name,
-#                 gpu_properties.major,
-#                 gpu_properties.minor,
-#                 gpu_properties.total_memory / 1e9))
-#         else:
-#             print("Using CPU for inference.\n")
-
-#         ## Load the models one by one.
-        
-#         print("HERO")
-        
         ensure_default_models(Path("saved_models"))
         encoder.load_model(Path("saved_models/default/encoder.pt"))
         global synthesizer
@@ -319,7 +222,6 @@ def create_app(test_config=None):
                     "wav, m4a, flac, ...):\n"
         
         in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
-        #in_fpath = Path(filename)
         
 
         ## Computing the embedding
@@ -416,12 +318,6 @@ def create_app(test_config=None):
 
 
         print("Audio recorded...")
-
-        #---OPTIONAL- play the iput file
-        #wave_obj = sa.WaveObject.from_wave_file(filename)
-        #play_obj = wave_obj.play()
-        #play_obj.wait_done()  # Wait until sound has finished playing
-
 
         text = "Default"
         filename = 'newFILE.wav'
