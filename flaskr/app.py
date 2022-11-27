@@ -89,15 +89,12 @@ def create_app(test_config=None):
 
     @application.post('/upload')
     def login_post():
-            
         
         print(request.files['file'])
-
         print(exists(request.files['file'].filename))
         uploaded_file = request.files['file']
         if uploaded_file.filename != '':
             uploaded_file.save(uploaded_file.filename)
-        
         print(exists(request.files['file'].filename))
 
 
