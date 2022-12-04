@@ -53,20 +53,22 @@ class Cloner:
         """
 
         # Prepare global variables
-        global synthesizer
+        #global synthesizer
+
         texts = [text]
         embeds = [embed]
 
         # Synthesize the spectogram from embeddings and the text
-        specs = synthesizer.synthesize_spectrograms(texts, embeds)
+        specs = self.synthesizer.synthesize_spectrograms(texts, embeds)
         spec = specs[0]
+
 
         # Synthesize the wave form
         generated_wav = vocoder.infer_waveform(spec)
 
         ## Post-generation
         # Sounddevice cuts audio one second earlier, so we must pad it.
-        generated_wav = np.pad(generated_wav, (0, synthesizer.sample_rate), mode="constant")
+        generated_wav = np.pad(generated_wav, (0, self.synthesizer.sample_rate), mode="constant")
 
         # Trim excess silences to compensate for gaps in spectrograms (issue #53)
         generated_wav = encoder.preprocess_wav(generated_wav)
@@ -74,7 +76,7 @@ class Cloner:
         # Play the audio (non-blocking)
         import sounddevice as sd
         try:
-            sd.play(generated_wav, synthesizer.sample_rate)
+            sd.play(generated_wav, self.synthesizer.sample_rate)
         except sd.PortAudioError as e:
             print("\nCaught exception: %s" % repr(e))
             print("Continuing without audio playback.\n")
@@ -84,14 +86,13 @@ class Cloner:
         # TODO return compatible audio file for React Native consumption
 
         # Save on the disk
-        global num_generated
-        filename = "demo_output_%02d.wav" % num_generated
-        sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
-        num_generated += 1
+        filename = "demo_output_%02d.wav" % self.num_generated
+        sf.write(filename, generated_wav.astype(np.float32), self.synthesizer.sample_rate)
+        self.num_generated += 1
 
 
 
-    def train(file):
+    def train(self, file):
         """
         Trains our embedding, using the audio file `file` to create a voice clone.
         """
@@ -107,6 +108,8 @@ class Cloner:
         audioSegment.export(out_f="out.wav",format="wav")
         in_fpath = Path(("out.wav").replace("\"", "").replace("\'", ""))
 
+        print("MADE IT HERE")
+
 
         ## The following 2 preprocesssing methods are equivalent.
         
@@ -119,9 +122,12 @@ class Cloner:
         # Use the librosa package to load the audio file and determine sampling rate
         original_wav, sampling_rate = librosa.load(str(in_fpath))
 
+
+        print("HERE")
         # Proprocess the wave file
         preprocessed_wav = encoder.preprocess_wav(original_wav, sampling_rate)
 
         # Derive the embedding. There are many functions and parameters that the
         # speaker encoder interfaces.
         embed = encoder.embed_utterance(preprocessed_wav)
+        print("HERE")

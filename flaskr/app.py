@@ -25,17 +25,19 @@ import sys
 
 from flask import Flask
 from flask import request
-from cloner import Cloner
-from transcriber import Transcriber
-from grammar_corrector import Grammar_Corrector
+import cloner
+import grammar_corrector
+import transcriber
 
 embed = None
 num_generated = None
 synthesizer = None
 
-cloner = Cloner()
-grammarCorrect = Grammar_Corrector()
-transcriber = Transcriber()
+grammarCorrect = grammar_corrector.Grammar_Corrector()
+transcriber = transcriber.Transcriber()
+print("HERO")
+cloner = cloner.Cloner()
+
 
 
 def create_app(test_config=None):
@@ -64,6 +66,7 @@ def create_app(test_config=None):
 
     @application.post('/grammarlyify')
     def grammarlyify():
+        print("grammarly CALLED")
         """
         Recieves text with grammatical errors
         Fixes grammatical errors in text
@@ -85,6 +88,7 @@ def create_app(test_config=None):
 
     @application.post('/upload')
     def login_post():
+        print("UPLOAD CALLED")
         """
         Recieves audio file
         Transcribes text from audio file
@@ -104,6 +108,7 @@ def create_app(test_config=None):
 
     @application.post('/toAudio')
     def TTS():
+        print("TTS CALLED")
         """
         Recieves grammatically correct text
         Completes text to speech operation using clone voice
@@ -121,6 +126,7 @@ def create_app(test_config=None):
 
     @application.post('/train')
     def train():
+        print("TRAINING CALLED")
         """
         Recieves audio file of user speaking
         Trains voice cloner to create user voice clone
