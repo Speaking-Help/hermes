@@ -1,42 +1,29 @@
 import os
-from pydub import AudioSegment
+import sys
 from os.path import exists
 # import required libraries s
 import speech_recognition as sr
-from happytransformer import HappyTextToText, TTSettings
-from gtts import gTTS
 from io import BytesIO
 import os
 from pathlib import Path
 
 #Using encoder, synthesizer, utils, vocoder
+sys.path.append('../src/modules')
 
-import librosa
 import numpy as np
 import soundfile as sf
-import torch
-from encoder import inference as encoder
-from encoder.params_model import model_embedding_size as speaker_embedding_size
-from synthesizer.inference import Synthesizer
-from utils.argutils import print_args
-from utils.default_models import ensure_default_models
-from vocoder import inference as vocoder
 from os import path
 import sys
 
 from flask import Flask
 from flask import request
 import cloner
-import grammar_corrector
+# import grammar_corrector
 import transcriber
 
-embed = None
-num_generated = None
-synthesizer = None
 
-grammarCorrect = grammar_corrector.Grammar_Corrector()
+# grammarCorrect = grammar_corrector.Grammar_Corrector()
 transcriber = transcriber.Transcriber()
-print("HERO")
 cloner = cloner.Cloner()
 
 
@@ -123,6 +110,7 @@ def create_app(test_config=None):
 
         # Synthesize cloned voice using text
         cloner.synthesize(text, language)
+        return "Completed"
 
 
     @application.post('/train')
@@ -139,6 +127,6 @@ def create_app(test_config=None):
         # Train cloner on audio file
         cloner.train(audioFile)
 
-        return None
+        return "Completed"
 
     return application
