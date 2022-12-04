@@ -1,6 +1,5 @@
 from gramformer import Gramformer
 import torch
-import spacy
 
 
 import difflib

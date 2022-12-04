@@ -1,9 +1,7 @@
 import os
-from pydub import AudioSegment
 from os.path import exists
 # import required libraries s
 import speech_recognition as sr
-from happytransformer import HappyTextToText, TTSettings
 from gtts import gTTS
 from playsound import playsound
 from pydub import AudioSegment
@@ -24,11 +22,8 @@ from utils.argutils import print_args
 from utils.default_models import ensure_default_models
 from vocoder import inference as vocoder
 from os import path
-from pydub import AudioSegment
 import sys
 
-from flask import Flask
-from flask import request
 
 
 

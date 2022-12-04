@@ -4,24 +4,23 @@ from pathlib import Path
 import librosa
 import numpy as np
 import soundfile as sf
-import torch
 from pydub import AudioSegment
 
-
-sys.path.append("../../libs/voice_cloning")
 
 from encoder import inference as encoder
 from encoder.params_model import model_embedding_size as speaker_embedding_size
 from synthesizer.inference import Synthesizer
-from utils.argutils import print_args
 from utils.default_models import ensure_default_models
 from vocoder import inference as vocoder
+
+sys.path.append('../src/modules')
 
 
 class Cloner:
 
     # Locate Pytorch models
     ensure_default_models(Path("saved_models"))
+    print(os.path.abspath("saved_models"))
     encoderModel = Path("saved_models/default/encoder.pt")
     synthesizerModel = Path("saved_models/default/synthesizer.pt")
     vocodermodel = Path("saved_models/default/vocoder.pt")

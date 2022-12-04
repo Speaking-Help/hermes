@@ -1,32 +1,21 @@
+# import required libraries s
 import os
 import sys
-from os.path import exists
-# import required libraries s
-import speech_recognition as sr
-from io import BytesIO
-import os
-from pathlib import Path
+from os import path
 
 #Using encoder, synthesizer, utils, vocoder
 sys.path.append('../src/modules')
 
-import numpy as np
-import soundfile as sf
-from os import path
-import sys
-
 from flask import Flask
 from flask import request
 import cloner
-# import grammar_corrector
 import transcriber
+# import grammar_corrector
 
 
 # grammarCorrect = grammar_corrector.Grammar_Corrector()
 transcriber = transcriber.Transcriber()
 cloner = cloner.Cloner()
-
-
 
 def create_app(test_config=None):
     # create and configure the app
