@@ -4,6 +4,8 @@ import whisper
 from scipy.io import wavfile
 import os
 import noisereduce as nr
+from pathlib import Path
+from pydub import AudioSegment
 
 class Transcriber:
 
@@ -29,18 +31,33 @@ class Transcriber:
         print("Could not recognize")
 
   def transcribe_from_audio(self, input_audio):
+
+    if input_audio.filename != '':
+            input_audio.save(input_audio.filename)
+
+    filename = input_audio.filename
+
+    track = AudioSegment.from_file(filename,  format= 'm4a')
+    file_handle = track.export('newFILE.wav', format='wav')
+
+    text = "Default"
+    filename = 'newFILE.wav'
+
     """
     Transcribes audio given a WAV/AIFF/FLAC audio file path ``input_audio``. 
 
     Returns the transcribed audio as a string.
     """
-    with sr.AudioFile(input_audio) as source:
-        audio = self._r.record(source)
-    try:
-        transcribed = self._r.recognize_google(audio, language="en-US")
-        return transcribed
-    except:
-        print("Could not recognize")
+    print("TYPE IS " + str(type(input_audio)))
+
+    r = sr.Recognizer()
+    with sr.AudioFile(filename) as source:
+        # listen for the data (load audio to memory)
+        audio_data = r.record(source)
+        # recognize (convert from speech to text)
+        text = r.recognize_google(audio_data)
+
+    return text
 
   def transcribe_from_audio_whisper(self, input_audio):
     """
@@ -49,10 +66,28 @@ class Transcriber:
 
     Returns the transcribed audio as a string.
     """
+    print("TYPE IS " + str(type(input_audio)))
+    input_audio.save('zzzz.wav')
 
-    rate, data = wavfile.read(input_audio)
-    reduced_noise = nr.reduce_noise(y=data, sr=rate)
-    wavfile.write("denoised.wav", rate, reduced_noise)
-    result = self._model.transcribe("denoised.wav", language='english')
-    os.remove("denoised.wav")
+    # rate, data = wavfile.read('sample.wav')
+    # reduced_noise = nr.reduce_noise(y=data, sr=rate)
+    # wavfile.write("denoised.wav", rate, reduced_noise)
+    if input_audio.filename != '':
+      input_audio.save(input_audio.filename)
+
+    filename = input_audio.filename
+
+    track = AudioSegment.from_file(filename,  format= 'm4a')
+    file_handle = track.export('newFILE.wav', format='wav')
+
+    text = "Default"
+    pa = Path('newFILE.wav')
+
+
+    result = self._model.transcribe(audio=pa, language='english')
+    print("RESULT IS " + str(result["text"]))
+    print(result)
+    print("\n\n\n\n\n")
+    # os.remove("sample.wav")
+
     return result["text"]

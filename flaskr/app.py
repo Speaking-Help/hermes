@@ -83,7 +83,7 @@ def create_app(test_config=None):
         uploaded_file = request.files['file']
 
         # Return transcribed audio
-        text = transcriber.transcribe_from_audio(uploaded_file)
+        text = transcriber.transcribe_from_audio_whisper(uploaded_file)
         return {
             "text": text
         }

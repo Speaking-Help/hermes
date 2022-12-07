@@ -47,6 +47,8 @@ class Cloner:
 
 
     def synthesize(self, text, language):
+        print("synthesizing " + str(text))
+
         """
         Synthesizes speech by cloning `in_filename`, using the text provided by `text`, outputting to `out_filename`.
         """
@@ -55,7 +57,7 @@ class Cloner:
         #global synthesizer
 
         texts = [text]
-        embeds = [embed]
+        embeds = [self.embed]
 
         # Synthesize the spectogram from embeddings and the text
         specs = self.synthesizer.synthesize_spectrograms(texts, embeds)
