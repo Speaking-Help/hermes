@@ -8,12 +8,15 @@ sys.path.append('../src/modules')
 
 from flask import Flask
 from flask import request
+from flask import jsonify
 import cloner
 import transcriber
-# import grammar_corrector
+import grammar_corrector
+from pathlib import Path
 
 
-# grammarCorrect = grammar_corrector.Grammar_Corrector()
+
+grammarCorrect = grammar_corrector.Grammar_Corrector()
 transcriber = transcriber.Transcriber()
 cloner = cloner.Cloner()
 
@@ -55,11 +58,16 @@ def create_app(test_config=None):
 
         # Retrieve fixed text versions
         fixedText = grammarCorrect.correct_sentence(text)
+        diff = grammarCorrect.find_deltas(text, fixedText)
+
 
         ## deltas = grammarCorrect.find_deltas(text, fixedText)
         # TODO return deltas as well
 
-        return fixedText
+        return {
+            "text": fixedText,
+            "diff": diff
+        }
 
 
 
@@ -72,16 +80,14 @@ def create_app(test_config=None):
         Returns transcribed text
         """
 
-        # Recieve audio file and prepare for processing
         uploaded_file = request.files['file']
-        if uploaded_file.filename != '':
-            uploaded_file.save(uploaded_file.filename)
-        filename = uploaded_file.filename
-        path = Path(filename)
 
         # Return transcribed audio
-        text = transcriber.transcribe_from_audio_whisper(path)
-        return text
+        text = transcriber.transcribe_from_audio(uploaded_file)
+        return {
+            "text": text
+        }
+        
 
     @application.post('/toAudio')
     def TTS():
