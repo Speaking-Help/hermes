@@ -66,8 +66,6 @@ class Transcriber:
 
     Returns the transcribed audio as a string.
     """
-    print("TYPE IS " + str(type(input_audio)))
-    input_audio.save('zzzz.wav')
 
     # rate, data = wavfile.read('sample.wav')
     # reduced_noise = nr.reduce_noise(y=data, sr=rate)
@@ -84,7 +82,7 @@ class Transcriber:
     pa = Path('newFILE.wav')
 
 
-    result = self._model.transcribe(audio=pa, language='english')
+    result = self._model.transcribe(audio='newFile.wav', language='english')
     print("RESULT IS " + str(result["text"]))
     print(result)
     print("\n\n\n\n\n")
