@@ -60,10 +60,6 @@ def create_app(test_config=None):
         fixedText = grammarCorrect.correct_sentence(text)
         diff = grammarCorrect.find_deltas(text, fixedText)
 
-
-        ## deltas = grammarCorrect.find_deltas(text, fixedText)
-        # TODO return deltas as well
-
         return {
             "text": fixedText,
             "diff": diff

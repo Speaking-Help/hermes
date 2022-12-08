@@ -102,9 +102,3 @@ def testingMethod():
 
     correction_underline = "".join(correction_underline)
     print(correction_underline)
-
-
-# Antiquated
-
-# if __name__ == "__main__":
-#     main()

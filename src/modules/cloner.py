@@ -107,8 +107,6 @@ class Cloner:
         audioSegment.export(out_f="out.wav",format="wav")
         in_fpath = Path(("out.wav").replace("\"", "").replace("\'", ""))
 
-        print("MADE IT HERE")
-
 
         ## The following 2 preprocesssing methods are equivalent.
         
