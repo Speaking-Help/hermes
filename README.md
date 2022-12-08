@@ -5,7 +5,7 @@ Back-end responsible for grammar correcting a dictated phrase and outputting it 
 # Structure
 
 hermes
-    flaskr
+ >flaskr
         app.py
     src/modules
         encoder
