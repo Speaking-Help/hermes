@@ -5,8 +5,8 @@ Back-end responsible for grammar correcting a dictated phrase and outputting it 
 # Structure
 
 hermes
->flaskr
->>app.py
+&emsp;flaskr
+&emsp;&emsp;app.py
 >src/modules
 >>encoder
 >>>saved_models
