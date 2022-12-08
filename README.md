@@ -28,7 +28,7 @@ hermes
 
 # User Flow in Demo App
 
-Immediately upon signing into app, user makes an API call to '/train' to train the voice cloner. 
-Now, user can go to chat screen and interface with UI. They record a phrase they want to fix, and the app will send a request to '/upload' to recieve a transcription of what they said; then, we get the fixed version of that text using '/grammarlyify' and we display that text on screen.
-The user now has the option to click on the text display to send a request to '/toAudio' and hear their voice say the fixed text back to them.
-From here, theh user can either re-record more snippets to fix, or they can retrain the UI.
+- Immediately upon signing into app, user makes an API call to '/train' to train the voice cloner. 
+- Now, user can go to chat screen and interface with UI. They record a phrase they want to fix, and the app will send a request to '/upload' to recieve a transcription of what they said; then, we get the fixed version of that text using '/grammarlyify' and we display that text on screen.
+- The user now has the option to click on the text display to send a request to '/toAudio' and hear their voice say the fixed text back to them.
+- From here, the user can either re-record more snippets to fix, or they can retrain the UI.
