@@ -16,7 +16,7 @@ hermes\
 &emsp;&emsp;archived.py\
 &emsp;&emsp;cloner.py\
 &emsp;&emsp;grammar_corrector.py\
-&emsp;&emsp;transcriber.py\
+&emsp;&emsp;transcriber.py
 
 # API Calls
 
