@@ -23,7 +23,8 @@ hermes
 - Post ("/train") with audio file (short snippet, around 4-8 seconds of clear and constant speaking) | trains an instance of the voice cloner.
 - Post ("/upload") with audio file of a phrase to transcribe | returns text transcribed by OpenAI's Whisper 
 - Post ("/grammarlyify") with incorrect text snippet | returns fixed text snippet
-- Post ("/toAudio") with correct text | recieve text in the sound of their voice
+- Post ("/toAudio") with correct text | recieve text in the sound of their voice 
+- Post request to OpenAI's API for chatbot.
 
 # User Flow in Demo App
 
