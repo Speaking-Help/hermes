@@ -4,19 +4,19 @@ Back-end responsible for grammar correcting a dictated phrase and outputting it 
 
 # Structure
 
-hermes
-&emsp;flaskr
-&emsp;&emsp;app.py
->src/modules
->>encoder
->>>saved_models
->>synthesizer
->>utils
->>vocoder
->>archived.py
->>cloner.py
->>grammar_corrector.py
->>transcriber.py
+hermes\
+&emsp;flaskr\
+&emsp;&emsp;app.py\
+&emsp;src/modules\
+&emsp;&emsp;encoder\
+&emsp;&emsp;saved_models\
+&emsp;&emsp;synthesizer\
+&emsp;&emsp;utils\
+&emsp;&emsp;vocoder\
+&emsp;&emsp;archived.py\
+&emsp;&emsp;cloner.py\
+&emsp;&emsp;grammar_corrector.py\
+&emsp;&emsp;transcriber.py\
 
 # API Calls
 
