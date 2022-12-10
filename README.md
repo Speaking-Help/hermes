@@ -1,7 +1,17 @@
 # Hermes
 Back-end responsible for grammar correcting a dictated phrase and outputting it in a synthesized audio format.
 
-
+# Usage
+````
+git clone ----
+cd hermes
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install requirements.txt
+cd flaskr
+flask run
+````
+ 
 # Structure
 
 hermes\
