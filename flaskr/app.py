@@ -29,6 +29,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(application.instance_path, 'flaskr.sqlite'),
     )
 
+    
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -42,6 +43,11 @@ def create_app(test_config=None):
         os.makedirs(application.instance_path)
     except OSError:
         pass
+
+
+    @application.get('/hello')
+    def hello():
+        return "Hi"
     
 
     @application.post('/grammarlyify')

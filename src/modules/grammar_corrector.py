@@ -102,3 +102,5 @@ def testingMethod():
 
     correction_underline = "".join(correction_underline)
     print(correction_underline)
+
+testingMethod()
