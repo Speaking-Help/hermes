@@ -10,7 +10,9 @@ source .venv/bin/activate
 pip3 install -r requirements.txt
 pip3 install -U git+https://github.com/PrithivirajDamodaran/Gramformer.git
 pip3 install git+https://github.com/openai/whisper.git
-python -m spacy download en 
+python -m spacy download en
+// NOTE THAT THE FOLLOWING STEP REQUIRES HOMEBREW
+brew install ffmpeg
 cd flaskr
 flask run
 ````
