@@ -11,7 +11,8 @@ pip3 install -r requirements.txt
 pip3 install -U git+https://github.com/PrithivirajDamodaran/Gramformer.git
 pip3 install git+https://github.com/openai/whisper.git
 python -m spacy download en
-// NOTE THAT THE FOLLOWING STEP REQUIRES HOMEBREW ON MACOS; ON WINDOWS AND LINUX INSTALL FFMPEG HOWEVER APPROPRIATE
+// NOTE THAT THE FOLLOWING STEP TO ADD FFMPEG, A REQUIRED COMPONENT, REQUIRES HOMEBREW ON MACOS.
+// ON WINDOWS AND LINUX INSTALL FFMPEG HOWEVER APPROPRIATE.
 brew install ffmpeg
 cd flaskr
 flask run
